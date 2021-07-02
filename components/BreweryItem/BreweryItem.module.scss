@@ -1,0 +1,21 @@
+@import '../../styles/variables';
+
+.breweryItemContainer {
+    width: 18rem;
+    height: 20rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    cursor: pointer;
+    border: 1px solid $color-border-primary;
+
+    p, h1 {
+        margin-left: 1rem;
+    }
+}
+
+.breweryType {
+    width: 100%;
+    justify-self: flex-end;
+    border-top: 1px solid $color-border-primary;
+}
