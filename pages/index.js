@@ -1,27 +1,29 @@
 import {useState, useEffect} from 'react'
 import api from './api'
 import Header from '../components/Header'
+import Filter from '../components/Filter'
 import BreweryItem from '../components/BreweryItem'
 import styles from '../styles/Home.module.scss'
 
 export default function Home() {
-  const [page, setPage] = useState(1)
   const [breweries, setBreweries] = useState([])
+  const [type, setType] = useState('')
+  const [page, setPage] = useState(1)
 
   useEffect(() => {
     const getBreweries = async () => {
-      await api.get(`breweries?page=${page}`)
+      const endpoint = type !== '' ? `breweries?by_type=${type}&page=${page}` : `breweries?page=${page}`
+      await api.get(endpoint)
       .then(res => setBreweries(res.data))
       .catch(() => alert('Falha na requisição'))
     }
     getBreweries()
-  }, [page])
-
-  
+  }, [page, type])
 
   return (
     <div className={styles.homeContainer}>
       <Header />
+      <Filter value={type} onChange={e => setType(e.target.value)} />
       <div className={styles.breweryGrid}>
         {breweries.length !== 0 &&
           breweries.map((brewery) => {
@@ -33,6 +35,7 @@ export default function Home() {
                 city={brewery.city}
                 state={brewery.state}
                 country={brewery.country}
+                postal_code={brewery.postal_code}
                 brewery_type={brewery.brewery_type}
               />
             )
