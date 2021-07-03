@@ -30,6 +30,7 @@ export default function Home() {
             return (
               <BreweryItem 
                 key={brewery.id}
+                id={brewery.id}
                 name={brewery.name}
                 street={brewery.street}
                 city={brewery.city}
