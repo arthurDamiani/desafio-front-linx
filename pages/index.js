@@ -1,4 +1,5 @@
-import {useState, useEffect} from 'react'
+import {useState, useEffect, useContext} from 'react'
+import {FilterContext} from './_app'
 import api from './api'
 import Header from '../components/Header'
 import Filter from '../components/Filter'
@@ -8,7 +9,7 @@ import styles from '../styles/Home.module.scss'
 
 export default function Home() {
   const [breweries, setBreweries] = useState([])
-  const [type, setType] = useState('')
+  const [type, setType] = useContext(FilterContext)
   const [page, setPage] = useState(1)
 
   useEffect(() => {

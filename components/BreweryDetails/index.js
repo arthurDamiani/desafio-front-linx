@@ -3,7 +3,7 @@ import Link from 'next/link'
 import styles from './BreweryDetails.module.scss'
 
 export default function BreweryDetails({name, type, street, city, state, postal_code, country, website, phone, lat, lon}) {
-    const handleShowInfo = info => info === null ? 'not provided' : info
+    const handleShowInfo = info => info ? info : 'Not provided'
 
     return (
         <div className={styles.breweryDetailsContainer}>
@@ -14,10 +14,14 @@ export default function BreweryDetails({name, type, street, city, state, postal_
             <p>State: {handleShowInfo(state)}</p>
             <p>Postal code: {handleShowInfo(postal_code)}</p>
             <p>Country: {handleShowInfo(country)}</p>
-            <p>Website: <Link href={handleShowInfo(website)}>{handleShowInfo(website)}</Link></p>
+            <p>Website: {website ? <Link href={website}>{website}</Link> : 'Not provided'}</p>
             <p>Phone: {handleShowInfo(phone)}</p>
             <p>Open in maps:
-                <a href={`https://www.google.com/maps/?q=${lat},${lon}`}>{handleShowInfo(lat)}</a>
+                {lat && lon ?
+                    <a href={`https://www.google.com/maps/?q=${lat},${lon}`}>{`${lat}, ${lon}`}</a>
+                :
+                    'Not provided'
+                }
             </p>
         </div>
     )

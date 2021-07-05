@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/router'
 import api from '../api'
 import Header from '../../components/Header'
+import BackButton from '../../components/BackButton'
 import BreweryDetails from '../../components/BreweryDetails'
 import Footer from '../../components/Footer'
 
@@ -22,7 +23,7 @@ export default function BreweriesDetails() {
     return (
         <>
             <Header />
-            <button onClick={() => router.back()}>back</button>
+            <BackButton onClick={() => router.back()}/>
             {breweriesDetails.length !== 0 &&
                 <BreweryDetails
                     name={breweriesDetails.name}
