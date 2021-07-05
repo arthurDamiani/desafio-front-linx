@@ -3,6 +3,7 @@ import api from './api'
 import Header from '../components/Header'
 import Filter from '../components/Filter'
 import BreweryItem from '../components/BreweryItem'
+import Footer from '../components/Footer'
 import styles from '../styles/Home.module.scss'
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
   const [page, setPage] = useState(1)
 
   useEffect(() => {
+    window.scrollTo(0, 0)
     const getBreweries = async () => {
       const endpoint = type !== '' ? `breweries?by_type=${type}&page=${page}` : `breweries?page=${page}`
       await api.get(endpoint)
@@ -25,7 +27,7 @@ export default function Home() {
       <Header />
       <Filter value={type} onChange={e => setType(e.target.value)} />
       <div className={styles.breweryGrid}>
-        {breweries.length !== 0 &&
+        {breweries.length !== 0 ?
           breweries.map((brewery) => {
             return (
               <BreweryItem 
@@ -41,22 +43,25 @@ export default function Home() {
               />
             )
           })
+        :
+          <h1>No breweries found!</h1>
         }
       </div>
       <div className={styles.paginationButtonsContainer}>
         <button 
           onClick={() => setPage(1)}
-          className={page === 1 && styles.buttonActive}
+          className={page === 1 ? styles.buttonActive : undefined}
         >1</button>
         <button 
           onClick={() => setPage(2)}
-          className={page === 2 && styles.buttonActive}
+          className={page === 2 ? styles.buttonActive : undefined}
         >2</button>
         <button 
           onClick={() => setPage(3)}
-          className={page === 3 && styles.buttonActive}
+          className={page === 3 ? styles.buttonActive : undefined}
         >3</button>
       </div>
+      <Footer />
     </div>
   )
 }

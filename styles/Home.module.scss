@@ -12,8 +12,17 @@
   width: auto;
   height: 100%;
   display: grid;
-  grid-template-columns: 19rem 19rem 19rem 19rem;
-  grid-template-rows: 23rem 23rem 23rem 23rem 23rem;
+  grid-template-columns: 19rem 19rem 19rem 18rem;
+
+  @include desktop() {
+    grid-template-columns: 19rem 19rem 18rem;
+  }
+  @include tablet() {
+    grid-template-columns: 19rem 18rem;
+  }
+  @include mobile() {
+    grid-template-columns: 18rem;
+  }
 }
 
 .paginationButtonsContainer {
